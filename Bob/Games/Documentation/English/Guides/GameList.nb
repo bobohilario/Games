@@ -1,0 +1,344 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 13.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     12812,        336]
+NotebookOptionsPosition[      8712,        250]
+NotebookOutlinePosition[      9479,        273]
+CellTagsIndexPosition[      9436,        270]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[TextData[{
+ "New in: ",
+ Cell["??", "HistoryData",
+  CellTags->"New",ExpressionUUID->"8539e462-2042-4ed1-992f-49f30e06c15e"],
+ " | Modified in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Modified",ExpressionUUID->"0230cb6c-42e7-4bf7-bc3e-670cb28e3c5a"],
+ " | Obsolete in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Obsolete",ExpressionUUID->"d94a9ac2-20ec-425b-8831-93856ac79566"],
+ " | Excised in: ",
+ Cell[" ", "HistoryData",
+  CellTags->"Excised",ExpressionUUID->"e5f277d5-464b-47cf-8df0-60cc8b17d223"]
+}], "History",
+ CellID->365268182,ExpressionUUID->"e358c64e-252d-4eed-95b6-bbd347a4151c"],
+
+Cell["Created by: bobs on 12-08-2021 09:33:29", "AuthorDate",
+ CellID->195694418,ExpressionUUID->"87a2594c-1d7d-4166-96d9-2c5ad12fdd09"],
+
+Cell[CellGroupData[{
+
+Cell["Categorization", "CategorizationSection",
+ CellID->1554071748,ExpressionUUID->"fc71c135-42f8-49d4-9fa6-6aed23b3c8f5"],
+
+Cell["Guide", "Categorization",
+ CellLabel->"Entity Type",
+ CellID->1587753822,ExpressionUUID->"1e0c05e4-be54-4be9-b6d5-00234ab834e2"],
+
+Cell["Bob/Games", "Categorization",
+ CellLabel->"Paclet Name",
+ CellID->746688732,ExpressionUUID->"b62f0a69-3283-4fe5-9c89-d2a607e46cb0"],
+
+Cell["Bob`Games`", "Categorization",
+ CellLabel->"Context",
+ CellID->1850569303,ExpressionUUID->"d68af044-7a6f-4552-925d-b78fadd7d0bb"],
+
+Cell["Bob/Games/guide/GameList", "Categorization",
+ CellLabel->"URI",
+ CellID->512616020,ExpressionUUID->"b76febc3-5b56-47af-afa7-b2ae56e3f097"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Keywords", "KeywordsSection",
+ CellID->1980540023,ExpressionUUID->"7799dd22-f6d3-4c77-b27e-2fba613b02ce"],
+
+Cell["XXXX", "Keywords",
+ CellID->939638061,ExpressionUUID->"233b59be-903a-4e21-87af-248418916f2a"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["GameList", "GuideTitle",
+ CellID->2049634836,ExpressionUUID->"89e10c84-6d52-4f5c-8f7e-b0dd5d35f79f"],
+
+Cell["The following games are include in this paclet", "GuideAbstract",
+ CellChangeTimes->{{3.847966412789715*^9, 3.847966421361066*^9}},
+ CellID->427507125,ExpressionUUID->"d3024185-5b9d-460f-8919-426e6a29a926"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["", "GuideFunctionsSection",
+ CellID->1779450660,ExpressionUUID->"6bd99917-db3c-461b-a3ec-605495a138ab"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Wolfle",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/Wolfle"]], "InlineGuideFunction",
+  ExpressionUUID->"8fd982f0-05b7-4e2f-84b3-0ee4d62680f9"],
+ " \[LongDash] Wordle but for Wolfram Language symbols"
+}], "GuideText",
+ CellChangeTimes->{{3.86006092679247*^9, 3.8600609641169233`*^9}},
+ CellID->2002719267,ExpressionUUID->"97a7a5b6-e4de-4891-a432-a6ee1aac0f26"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Wordle",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/Wordle"]], "InlineGuideFunction",
+  ExpressionUUID->"76ace95f-2ecf-4a83-9c98-3d7526c682aa"],
+ " \[LongDash] letter guessing word game"
+}], "GuideText",
+ CellChangeTimes->{{3.860061025588065*^9, 3.860061062049817*^9}},
+ CellID->905110255,ExpressionUUID->"3f38d82b-db69-4c8d-9237-de1b19927842"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Play2048",
+   BaseStyle->"Link",
+   ButtonData->"paclet:BobGames/ref/Play2048"]], "InlineGuideFunction",
+  ExpressionUUID->"615b85c7-3143-44a1-80e8-c23bd43dfb1a"],
+ " \[LongDash] ",
+ "tile matching and accumulation game ",
+ ButtonBox["2048",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+fb62dc0d-3370-4876-af7c-b98cc215e7dd/"], None},
+  ButtonNote->
+   "https://resources.wolframcloud.com/FunctionRepository/resources/fb62dc0d-\
+3370-4876-af7c-b98cc215e7dd/"]
+}], "GuideText",
+ CellChangeTimes->{{3.847966425546912*^9, 3.8479664676600657`*^9}},
+ CellID->1369974498,ExpressionUUID->"fe5354b9-be29-47a7-bea9-fadc8dc48b22"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Minesweeper",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/Minesweeper"]], "InlineGuideFunction",
+  ExpressionUUID->"23712ef1-408c-4e68-b11e-2ef1bea43bad"],
+ " \[LongDash] classic logic game of f",
+ ButtonBox["inding hidden mines",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+Minesweeper"], None},
+  ButtonNote->
+   "https://resources.wolframcloud.com/FunctionRepository/resources/\
+Minesweeper"]
+}], "GuideText",
+ CellChangeTimes->{{3.847966675074308*^9, 3.847966717496759*^9}},
+ CellID->1557219258,ExpressionUUID->"237d5d8a-3877-4d4f-9d61-226b88b7ce23"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Tetris",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/Tetris"]], "InlineGuideFunction",
+  ExpressionUUID->"f1889a2b-5e68-4fde-abf4-6f113442fb3b"],
+ " \[LongDash] ",
+ ButtonBox["polyomino",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+PolyominoesGame/"], None},
+  ButtonNote->
+   "https://resources.wolframcloud.com/FunctionRepository/resources/\
+PolyominoesGame/"],
+ " stacking game"
+}], "GuideText",
+ CellChangeTimes->{{3.847966472818953*^9, 3.847966508920561*^9}, {
+  3.8479667186526957`*^9, 3.84796671865279*^9}},
+ CellID->1989208399,ExpressionUUID->"647b9959-a0c5-494c-95dc-0981f81dcefa"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["Bingo",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/Bingo"]], "InlineGuideFunction",
+  ExpressionUUID->"5073e3a8-a972-4458-8e99-db656d5c6653"],
+ " \[LongDash] bingo card generator"
+}], "GuideText",
+ CellChangeTimes->{{3.847966522680806*^9, 3.847966553212558*^9}, {
+  3.8479667196715717`*^9, 3.847966719671616*^9}},
+ CellID->38283071,ExpressionUUID->"98dbf227-fc62-44dc-9135-7e073f8a7028"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["CircleTheDrain",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/CircleTheDrain"]], "InlineGuideFunction",
+  ExpressionUUID->"37d0ae77-940b-45e9-8163-f22ac878e329"],
+ " \[LongDash] how long can you keep the ",
+ ButtonBox["disk out of the drain",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+CircleTheDrain"], None},
+  ButtonNote->
+   "https://resources.wolframcloud.com/FunctionRepository/resources/\
+CircleTheDrain"],
+ "?"
+}], "GuideText",
+ CellChangeTimes->{{3.8479665309372587`*^9, 3.847966584262835*^9}, {
+  3.847966619380618*^9, 3.847966619381117*^9}, {3.847966720474492*^9, 
+  3.8479667204745913`*^9}},
+ CellID->1325963844,ExpressionUUID->"b96c7f30-991f-47d8-9428-b111a20a2ceb"],
+
+Cell[TextData[{
+ Cell[BoxData[
+  ButtonBox["LightOut",
+   BaseStyle->"Link",
+   ButtonData->"paclet:Bob/Games/ref/LightOut"]], "InlineGuideFunction",
+  ExpressionUUID->"ca476722-ae9b-4a8d-ac8e-d20e9518a2e9"],
+ " \[LongDash] puzzle game where you try to ",
+ ButtonBox["turn off all the lights",
+  BaseStyle->"Hyperlink",
+  ButtonData->{
+    URL["https://resources.wolframcloud.com/FunctionRepository/resources/\
+LightsOutGame"], None},
+  ButtonNote->
+   "https://resources.wolframcloud.com/FunctionRepository/resources/\
+LightsOutGame"]
+}], "GuideText",
+ CellChangeTimes->{{3.847966588718693*^9, 3.847966649383648*^9}, {
+  3.847966724374411*^9, 3.847966724374496*^9}},
+ CellID->1036521189,ExpressionUUID->"78d2b7f5-020d-48ba-b5af-f67bcecfd712"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Tech Notes", "GuideTutorialsSection",
+ CellID->514239036,ExpressionUUID->"b1f7b9ef-fdef-49e8-a592-1a8fc01c244e"],
+
+Cell["XXXX", "GuideTutorial",
+ CellID->1341282524,ExpressionUUID->"4df81a6e-cbd6-4a91-94b7-219f0079d776"],
+
+Cell["XXXX", "GuideTutorial",
+ CellID->799538309,ExpressionUUID->"98e41609-069b-4424-9585-e2bbbc367457"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Related Guides", "GuideMoreAboutSection",
+ CellChangeTimes->{{3.8430423939366693`*^9, 3.843042395176153*^9}},
+ CellID->1035180084,ExpressionUUID->"a3e36388-72ea-4f5c-aa61-421ff9130ad4"],
+
+Cell["XXXX", "GuideMoreAbout",
+ CellID->1506647441,ExpressionUUID->"fa5d1c0e-c808-4441-af11-fec4af9b12d7"],
+
+Cell["XXXX", "GuideMoreAbout",
+ CellID->1243859110,ExpressionUUID->"620e8a38-9c94-4691-a684-8747ddf903b0"]
+}, Open  ]],
+
+Cell["Related Links", "GuideRelatedLinksSection",
+ CellID->1934241872,ExpressionUUID->"549e4b7d-f382-4b5e-9cac-52c386745245"]
+},
+WindowSize->{700, 770},
+WindowMargins->{{4, Automatic}, {Automatic, 0}},
+TaggingRules->{
+ "DocuToolsSettingsInternal" -> {
+   "$PacletVersion" -> "0.10.2125", "$MVersion" -> "12", "$FlaggedVersion" -> 
+    11.3}, "WelcomeScreenSettings" -> {"FEStarting" -> False}, 
+  "SaveDialogDataSavesBlog" -> False, "Author" -> "bobs", "CreationDate" -> 
+  "12-08-2021 09:33:29"},
+FrontEndVersion->"13.1 for Mac OS X x86 (64-bit) (February 24, 2022)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "GuidePageStylesExt.nb", 
+  CharacterEncoding -> "UTF-8"],
+ExpressionUUID->"83e19341-252d-4af8-bdba-23eb27d385c3"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[558, 20, 598, 14, 24, "History",ExpressionUUID->"e358c64e-252d-4eed-95b6-bbd347a4151c",
+ CellID->365268182],
+Cell[1159, 36, 136, 1, 20, "AuthorDate",ExpressionUUID->"87a2594c-1d7d-4166-96d9-2c5ad12fdd09",
+ CellID->195694418],
+Cell[CellGroupData[{
+Cell[1320, 41, 123, 1, 29, "CategorizationSection",ExpressionUUID->"fc71c135-42f8-49d4-9fa6-6aed23b3c8f5",
+ CellID->1554071748],
+Cell[1446, 44, 134, 2, 30, "Categorization",ExpressionUUID->"1e0c05e4-be54-4be9-b6d5-00234ab834e2",
+ CellID->1587753822],
+Cell[1583, 48, 137, 2, 30, "Categorization",ExpressionUUID->"b62f0a69-3283-4fe5-9c89-d2a607e46cb0",
+ CellID->746688732],
+Cell[1723, 52, 135, 2, 30, "Categorization",ExpressionUUID->"d68af044-7a6f-4552-925d-b78fadd7d0bb",
+ CellID->1850569303],
+Cell[1861, 56, 144, 2, 30, "Categorization",ExpressionUUID->"b76febc3-5b56-47af-afa7-b2ae56e3f097",
+ CellID->512616020]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2042, 63, 111, 1, 29, "KeywordsSection",ExpressionUUID->"7799dd22-f6d3-4c77-b27e-2fba613b02ce",
+ CellID->1980540023],
+Cell[2156, 66, 99, 1, 19, "Keywords",ExpressionUUID->"233b59be-903a-4e21-87af-248418916f2a",
+ CellID->939638061]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2292, 72, 106, 1, 77, "GuideTitle",ExpressionUUID->"89e10c84-6d52-4f5c-8f7e-b0dd5d35f79f",
+ CellID->2049634836],
+Cell[2401, 75, 212, 2, 27, "GuideAbstract",ExpressionUUID->"d3024185-5b9d-460f-8919-426e6a29a926",
+ CellID->427507125]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2650, 82, 109, 1, 70, "GuideFunctionsSection",ExpressionUUID->"6bd99917-db3c-461b-a3ec-605495a138ab",
+ CellID->1779450660],
+Cell[2762, 85, 420, 9, 25, "GuideText",ExpressionUUID->"97a7a5b6-e4de-4891-a432-a6ee1aac0f26",
+ CellID->2002719267],
+Cell[3185, 96, 404, 9, 25, "GuideText",ExpressionUUID->"3f38d82b-db69-4c8d-9237-de1b19927842",
+ CellID->905110255],
+Cell[3592, 107, 736, 18, 25, "GuideText",ExpressionUUID->"fe5354b9-be29-47a7-bea9-fadc8dc48b22",
+ CellID->1369974498],
+Cell[4331, 127, 686, 17, 25, "GuideText",ExpressionUUID->"237d5d8a-3877-4d4f-9d61-226b88b7ce23",
+ CellID->1557219258],
+Cell[5020, 146, 722, 19, 25, "GuideText",ExpressionUUID->"647b9959-a0c5-494c-95dc-0981f81dcefa",
+ CellID->1989208399],
+Cell[5745, 167, 447, 10, 25, "GuideText",ExpressionUUID->"98dbf227-fc62-44dc-9135-7e073f8a7028",
+ CellID->38283071],
+Cell[6195, 179, 811, 20, 25, "GuideText",ExpressionUUID->"b96c7f30-991f-47d8-9428-b111a20a2ceb",
+ CellID->1325963844],
+Cell[7009, 201, 743, 18, 25, "GuideText",ExpressionUUID->"78d2b7f5-020d-48ba-b5af-f67bcecfd712",
+ CellID->1036521189]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7789, 224, 118, 1, 72, "GuideTutorialsSection",ExpressionUUID->"b1f7b9ef-fdef-49e8-a592-1a8fc01c244e",
+ CellID->514239036],
+Cell[7910, 227, 105, 1, 22, "GuideTutorial",ExpressionUUID->"4df81a6e-cbd6-4a91-94b7-219f0079d776",
+ CellID->1341282524],
+Cell[8018, 230, 104, 1, 22, "GuideTutorial",ExpressionUUID->"98e41609-069b-4424-9585-e2bbbc367457",
+ CellID->799538309]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8159, 236, 191, 2, 72, "GuideMoreAboutSection",ExpressionUUID->"a3e36388-72ea-4f5c-aa61-421ff9130ad4",
+ CellID->1035180084],
+Cell[8353, 240, 106, 1, 22, "GuideMoreAbout",ExpressionUUID->"fa5d1c0e-c808-4441-af11-fec4af9b12d7",
+ CellID->1506647441],
+Cell[8462, 243, 106, 1, 22, "GuideMoreAbout",ExpressionUUID->"620e8a38-9c94-4691-a684-8747ddf903b0",
+ CellID->1243859110]
+}, Open  ]],
+Cell[8583, 247, 125, 1, 72, "GuideRelatedLinksSection",ExpressionUUID->"549e4b7d-f382-4b5e-9cac-52c386745245",
+ CellID->1934241872]
+}
+]
+*)
+

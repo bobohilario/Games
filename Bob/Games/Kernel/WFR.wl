@@ -22,6 +22,7 @@ CircleTheDrain[args___]:=ResourceFunction["CircleTheDrain",ResourceSystemBase->"
 
 Minesweeper[args___]:=ResourceFunction["Minesweeper",ResourceSystemBase->"https://www.wolframcloud.com/obj/resourcesystem/api/1.0"][args]
 
+Wordle[args___]:=ResourceFunction["PlayWordle",ResourceSystemBase->"https://www.wolframcloud.com/obj/resourcesystem/api/1.0"][args]
 End[]; (* End `Private` *)
 
 EndPackage[];
