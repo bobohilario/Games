@@ -27,16 +27,16 @@ wolfleCompare[guess_Entity, target_Entity] :=
         $wolfledata[guess][#], $wolfledata[target][#]]&, 
         $wolflekeys]
 
-wolfleCompare[_,x_,x_]:=correct[x]
+wolfleCompare[_,x_,x_]:=correct[elidevalues@x]/.EntityClass["WolframLanguageSymbol", val_]:>val
 wolfleCompare[prop_,x_,y_]:=wolflecompare[prop,x,y]
 
 wolflecompare[
     HoldPattern[EntityProperty]["WolframLanguageSymbol", 
     "Attributes"|"EntityClasses"|"FunctionalityAreas"|"RelatedSymbols"],x_,y_]:=With[{i=Intersection[x,y]},
     If[i==={},
-        incorrect[x],
-        close[x]
-    ]
+        incorrect[elidevalues@x],
+        close[elidevalues@x]
+    ]/.EntityClass["WolframLanguageSymbol", val_]:>val
 ]
 
 wolflecompare[EntityProperty["WolframLanguageSymbol", "CharacterCount"],x_,y_]:=
@@ -64,8 +64,11 @@ visualizeComparison[as_]:=
        close->(Item[#,Background->Yellow,FontFamily->"Source Sans Pro"]&),
        incorrect->(Item[#,Background->None,FontFamily->"Source Sans Pro"]&)
    }
+
+elidevalues[l_List]:=Append[Take[l,UpTo[4]],"\[Ellipsis]"]/;Length[l]>5
+elidevalues[expr_]:=expr
    
-wolfleSummary[data_]:=Panel[Grid[Prepend[visualizeComparison/@data,Style[headerHint[#],18]&/@$wolflekeys], Dividers->{{False,{True},False},{False,{True},False}}],
+wolfleSummary[data_]:=Panel[Grid[Prepend[visualizeComparison/@data,Style[headerHint[#],18]&/@$wolflekeys], Frame->{None,All}],
     BaseStyle->{FontFamily->"Source Sans Pro"}]
 
 headerHint[
@@ -75,7 +78,7 @@ headerHint[
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "VersionIntroduced"]]:=
-    Tooltip["Version Introduced*","Yellow means the version numbers are within 1.0 \n(7.1 and 8.0 ->yellow, 7.0 and 8.1 -> not yellow)"]
+    Tooltip["Version Introduced","Yellow means the version numbers are within 1.0 \n(7.1 and 8.0 ->yellow, 7.0 and 8.1 -> not yellow)"]
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "RelatedSymbols"]]:=
@@ -83,7 +86,7 @@ headerHint[
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "CharacterCount"]]:=
-    Tooltip["CharacterCount","Yellow means the names are one character length apart"]
+    Tooltip["Length","Yellow means the names are one character length apart"]
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "Attributes"]]:=
@@ -103,6 +106,13 @@ Clear[Wolfle,wolfle]
 Wolfle[args___]:=Catch[wolfle[args],"wolfle"]
 
 wolfle[]:=wolfle[selectDailyWord[]]
+
+Wolfle["ClearResults"]:=DeleteObject/@PersistentObjects[ FileNameJoin[{"Bob","Games","Wolfle","CompletionData","*"}]]
+
+Wolfle["Random"]:=wolfle[selectRandomWord[]]
+
+selectDailyWord[]:=(SeedRandom[AbsoluteTime[Today]]; RandomChoice[$wolfledata])
+selectRandomWord[]:=(RandomChoice[$wolfledata])
 
 $nomessage="";
 wolfle[targetdata_Association]:=(checkCompleted[targetdata,Today];
@@ -188,12 +198,15 @@ checkCompleted[targetdata_,date_]:=With[{comp=PersistentSymbol[completionlocatio
 completionlocation[targetdata_,date_]:=
     FileNameJoin[{"Bob","Games","Wolfle","CompletionData",Hash[{targetdata,date}, "SHA256", "HexString"]}]
 
-selectDailyWord[]:=(SeedRandom[AbsoluteTime[Today]]; RandomChoice[$wolfledata])
-selectRandomWord[]:=(RandomChoice[$wolfledata])
 
 $maxguesses=10;
-wolfleGuess[guess_String,targetdata_,results_,i_]:=wolfleGuess[
-    $wolfledata[Entity["WolframLanguageSymbol", guess]],targetdata,results,i]
+Clear[wolfleGuess];
+wolfleGuess[guess_String,targetdata_,results_,i_]:=With[{guessdata=$wolfledata[Entity["WolframLanguageSymbol", guess]]},
+    If[AssociationQ[guessdata],
+        wolfleGuess[guessdata ,targetdata,results,i],
+        {results,"The given symbol \""<>guess<>"\" is not included in Wolfle.",False,i}
+    ]
+]
 
 wolfleGuess[guess:KeyValuePattern[{EntityProperty["WolframLanguageSymbol", "Name"]->name_}],
     targetdata:KeyValuePattern[{EntityProperty["WolframLanguageSymbol", "Name"]->name_}],results_,i_]:=  (
@@ -222,14 +235,75 @@ If[
     ]
 ]
 
-wolfleGuess[_,_,results_,i_]:={results,"The given symbol is not included in Wolfle.",False,i}
+wolfleGuess[_,_,results_,i_]:={results,"That guess is not supported in Wolfle.",False,i}
 
 storeCompleteWolfle[targetdata_, dynamicvalues_]:=
         PersistentSymbol[completionlocation[targetdata,Today]]=dynamicvalues;
 
-Wolfle["ClearResults"]:=DeleteObject/@PersistentObjects[ FileNameJoin[{"Bob","Games","Wolfle","CompletionData","*"}]]
 
-Wolfle["Random"]:=wolfle[selectRandomWord[]]
+Wolfle["WebForm"]:=With[{names=Names["System`*"], alldata=$wolfledata},
+    Delayed[
+        FormPage[{"Guess"-><|"Interpreter" -> "String", "Default" -> "", "Autosubmitting" -> True|>},
+        Module[{targetdata=(SeedRandom[AbsoluteTime[Today]]; RandomChoice[alldata]),
+            results={},message=$nomessage,complete=False,i=0,resultdata
+            },
+            resultdata=getCloudWolfleResults[targetdata];
+            If[ListQ[resultdata],
+                 {results,message,complete,i}=resultdata
+            ];
+            If[#Guess=!="",
+                {results,message,complete,i}=wolfleGuess[#Guess,targetdata,results,i];  
+                storeCloudWolfleResults[targetdata, {results,message,complete,i}];
+            ];
+            cloudResultsPanel[#Guess,results,message,i,complete]
+        ]&,
+        AppearanceRules-><|"Title" -> "Wolfle", "Description" -> "Wordle but for Wolfram Language symbols. Enter a WL symbol. Mouseover the headers in the results for more information."|>
+    ]
+
+    ]
+]
+
+getCloudWolfleResults[targetdata_Association]:=getCloudWolfleResults[cloudWolfleResultsLocation[$RequesterCloudUserUUID,Today,targetdata]]
+
+getCloudWolfleResults[loc_CloudObject]:=With[{res=Import[loc]},
+    If[ListQ[res],
+        res,
+        Missing[]
+    ]
+]
+
+cloudWolfleResultsLocation[user_,date_,targetdata_]:=CloudObject[
+    FileNameJoin[{"Bob","Games","Wolfle","CompletionData",Hash[{user,date,targetdata}, "SHA256", "HexString"]}]<>".wxf",Permissions->"Private"]
+
+storeCloudWolfleResults[targetdata_, data_]:=Export[cloudWolfleResultsLocation[$RequesterCloudUserUUID,Today,targetdata],data,"WXF"]
+
+cloudResultsPanel[guess_,results_,message_,i_,complete_]:=Panel@Grid[{
+           {
+                Style[message,Red,Italic,18]
+            },
+            {
+                wolfleSummary@results
+            },
+            {
+                If[complete,cloudShareMessage[results],$nomessage]
+            },
+
+            {Item["\"Wolfle\" Created By Bob Sandheinrich",FontSize->9,Alignment->Left]}
+},Background->GrayLevel[.9],Spacings->0,ItemSize->10,Frame->True
+        ]
+
+
+cloudShareMessage[as_]:=With[{colors=Lookup[as,$wolflekeys]/.{
+       correct->(("\|01F7E9")&),
+       close->(("\|01F7E8")&),
+       incorrect->(("\:2B1C")&)
+   }},
+Column[{"Share: ",
+Panel[
+   "Wolfle "<>DateString[{"Year", "-", "Month", "-", "Day"}]<>"<br>"<>
+   StringRiffle[StringJoin/@colors,"<br>"]<>"<br>https://wolfr.am/wolfle"]
+}]
+]
 
 wolfle[___]:=$Failed
 End[]; (* End `Private` *)
