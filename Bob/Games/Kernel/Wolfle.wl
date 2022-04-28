@@ -27,7 +27,7 @@ wolfleCompare[guess_Entity, target_Entity] :=
         $wolfledata[guess][#], $wolfledata[target][#]]&, 
         $wolflekeys]
 
-wolfleCompare[_,x_,x_]:=correct[x]
+wolfleCompare[_,x_,x_]:=correct[elidevalues@x]/.EntityClass["WolframLanguageSymbol", val_]:>val
 wolfleCompare[prop_,x_,y_]:=wolflecompare[prop,x,y]
 
 wolflecompare[
@@ -36,7 +36,7 @@ wolflecompare[
     If[i==={},
         incorrect[elidevalues@x],
         close[elidevalues@x]
-    ]
+    ]/.EntityClass["WolframLanguageSymbol", val_]:>val
 ]
 
 wolflecompare[EntityProperty["WolframLanguageSymbol", "CharacterCount"],x_,y_]:=
@@ -68,7 +68,7 @@ visualizeComparison[as_]:=
 elidevalues[l_List]:=Append[Take[l,UpTo[4]],"\[Ellipsis]"]/;Length[l]>5
 elidevalues[expr_]:=expr
    
-wolfleSummary[data_]:=Panel[Grid[Prepend[visualizeComparison/@data,Style[headerHint[#],18]&/@$wolflekeys], Dividers->{{False,{True},False},{False,{True},False}}],
+wolfleSummary[data_]:=Panel[Grid[Prepend[visualizeComparison/@data,Style[headerHint[#],18]&/@$wolflekeys], Frame->{None,All}],
     BaseStyle->{FontFamily->"Source Sans Pro"}]
 
 headerHint[
@@ -78,7 +78,7 @@ headerHint[
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "VersionIntroduced"]]:=
-    Tooltip["Version Introduced*","Yellow means the version numbers are within 1.0 \n(7.1 and 8.0 ->yellow, 7.0 and 8.1 -> not yellow)"]
+    Tooltip["Version Introduced","Yellow means the version numbers are within 1.0 \n(7.1 and 8.0 ->yellow, 7.0 and 8.1 -> not yellow)"]
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "RelatedSymbols"]]:=
@@ -86,7 +86,7 @@ headerHint[
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "CharacterCount"]]:=
-    Tooltip["CharacterCount","Yellow means the names are one character length apart"]
+    Tooltip["Length","Yellow means the names are one character length apart"]
 
 headerHint[
  EntityProperty["WolframLanguageSymbol", "Attributes"]]:=
@@ -245,7 +245,7 @@ Wolfle["WebForm"]:=With[{names=Names["System`*"], alldata=$wolfledata},
     Delayed[
         FormPage[{"Guess"-><|"Interpreter" -> "String", "Default" -> "", "Autosubmitting" -> True|>},
         Module[{targetdata=(SeedRandom[AbsoluteTime[Today]]; RandomChoice[alldata]),
-            results={},message=$nomessage,complete,i=0,resultdata
+            results={},message=$nomessage,complete=False,i=0,resultdata
             },
             resultdata=getCloudWolfleResults[targetdata];
             If[ListQ[resultdata],
@@ -289,7 +289,7 @@ cloudResultsPanel[guess_,results_,message_,i_,complete_]:=Panel@Grid[{
             },
 
             {Item["\"Wolfle\" Created By Bob Sandheinrich",FontSize->9,Alignment->Left]}
-        }
+},Background->GrayLevel[.9],Spacings->0,ItemSize->10,Frame->True
         ]
 
 
@@ -300,8 +300,8 @@ cloudShareMessage[as_]:=With[{colors=Lookup[as,$wolflekeys]/.{
    }},
 Column[{"Share: ",
 Panel[
-   "Wolfle "<>DateString[{"Year", "-", "Month", "-", "Day"}]<>"\n"<>
-   StringRiffle[StringJoin/@colors,"\n"]]
+   "Wolfle "<>DateString[{"Year", "-", "Month", "-", "Day"}]<>"<br>"<>
+   StringRiffle[StringJoin/@colors,"<br>"]<>"<br>https://wolfr.am/wolfle"]
 }]
 ]
 
